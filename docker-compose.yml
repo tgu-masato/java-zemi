@@ -10,3 +10,18 @@ services:
       - ./build/libs/:/usr/local/tomcat/webapps/
     ports:
       - "8080:8080"
+
+  db:
+    build:
+      context: ./containers/db
+    restart: always
+    environment:
+      MYSQL_DATABASE: sample
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql:/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysql: {}

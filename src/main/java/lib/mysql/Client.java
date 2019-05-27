@@ -11,7 +11,7 @@ public class Client {
 	private final static String DATABASE_NAME = "sample";
 	private final static String USER_NAME = "root";
 	private final static String PASSWORD = "root";
-	private final static String DRIVER_NAME = "com.mysql.jdbc.Driver";
+	private final static String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
 	private final static String DRIVER_URL = "jdbc:mysql://" + HOST_NAME + ":3306/" + DATABASE_NAME + "?useUnicode=true&characterEncoding=utf-8";
 
 	public static Connection createConnection() {
@@ -27,7 +27,7 @@ public class Client {
 		return null;
 	}
 
-	protected static void close(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
+	public static void close(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
 		if (connection != null) {
 			try {
 				connection.close();

@@ -3,7 +3,7 @@
          xsi:schemaLocation="http:/java.sun.com/dtd/web-app_2_3.dtd">
   <servlet>
     <servlet-name>HelloWorldServlet</servlet-name>
-    <servlet-class>com.github.mhilker.example.HelloWorldServlet</servlet-class>
+    <servlet-class>controller.HelloWorldServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>

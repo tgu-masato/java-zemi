@@ -4,9 +4,9 @@ services:
   app:
     build:
       context: ./containers/app
-    working_dir: /docker-tomcat-java-example
+    working_dir: /java_app_sample
     volumes:
-      - ./:/docker-tomcat-java-example
+      - ./:/java_app_sample
       - ./build/libs/:/usr/local/tomcat/webapps/
     ports:
       - "8080:8080"

@@ -1,70 +1,89 @@
-# Docker Tomcat Java Example
+# JSP / Servlet Example
 
-[![Software License][ico-license]](LICENSE.md)
+**Docker / Docker Compose / Gradle / Tomcat / MySQL** を用いた **JSP / Servlet** Web アプリケーションのサンプルです。
 
-This is a simple example for running a docker container with tomcat and java.
+## 必要なもの
 
-## Get it up and running
+- **Docker**
 
-- [Install docker on your machine.][install-docker]
+- **Docker Compose**
 
-- [Install docker-compose on your machine.][install-docker-compose]
+入ってない人たちは、 https://www.docker.com/ に行きましょう。 
 
-- [Install gradle on your machine.][install-gradle]
+## ローカルで動かすために
 
-- Clone this repository.
+### **$ git clone** or ($ ghq get)
 
-``` bash
-$ git clone https://github.com/mhilker/docker-tomcat-java-example
-```
-
-- Switch to the cloned directory.
+$ git clone （$ ghq get） しましょう。
 
 ``` bash
-$ cd docker-tomcat-java-example
+$ git clone https://github.com/cs-u-gakugei-ac-jp/java_app_sample
+($ ghq get https://github.com/cs-u-gakugei-ac-jp/java_app_sample)
 ```
 
-- Build the project.
+### 当該ディレクトリに移動
+
+がんばりましょう。
+
+``` bash
+$ cd "ひとそれぞれ"/java_app_sample
+```
+
+### Gradlew Build
+
+下記のコマンドを実行することにより、 **build** を行い、 war ファイルが生成されます。
 
 ``` bash
 $ ./gradlew build
 ```
 
-- Start the stack.
+### Docker Compose Up
+
+下記のコマンドを実行することにより、 **MySQL コンテナ** と **Tomcat コンテナ** が起動します。
 
 ``` bash
 $ docker-compose up
 ```
 
-- You should see an output like this.
+## もろもろ確認
+
+### Web アプリの動作確認
+
+任意のブラウザで、 **http://localhost:8080/hello** にアクセスすれば、 "Hello World !" が表示されるはずです。
+
+### DB の動作確認
+
+以下のパラメータで、 DB との疎通確認が行えるはずです。データベースの指定は、任意ですがデフォルトでは以下のような **sample** という DB が生成されているはずです。
+
+- **HOST:** 127.0.0.1
+- **USER:** root
+- **PASSWORD:** root
+- **PORT:** 3306
+
+## パクるために（option）
+
+以下にパクリ方書いておきます。（バグがあったらごめんなさい。）
+
+### .git ディレクトリの削除
 
 ``` bash
-docker-compose up --build
-Building tomcat
-Step 1/3 : FROM tomcat:alpine
- ---> 877ea9315a49
-Step 2/3 : RUN rm -fr /usr/local/tomcat/webapps/ROOT
- ---> Using cache
- ---> eca02f5f3cd9
-Step 3/3 : COPY ./build/libs/docker-tomcat-java-example.war /usr/local/tomcat/webapps/ROOT.war
- ---> Using cache
- ---> 00bf21347503
-Successfully built 00bf21347503
-Successfully tagged dockertomcatjavaexample_tomcat:latest
-Starting dockertomcatjavaexample_tomcat_1
-Attaching to dockertomcatjavaexample_tomcat_1
-tomcat_1  | 17-Jun-2017 14:03:31.578 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 403 ms
+$ rm -rf .git
 ```
 
-- Visit `localhost:8888` in your browser. You should see an output like this.
+### 自身のアカウントで git リポジトリ を作成
 
-![Hello World Output with Docker and Java + Tomcat](./resources/screenshot-01.png)
+がんばりましょう。
+リポジトリを作成したら、当該リポジトリの URL をコピーしておきましょう。
 
-## License
+### 自身の作成した git リポジトリ との関連付け
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+以下のコマンドを実行すれば、おそらく当該リポジトリにデータが反映されるはずです。
+それからは、自分で開発頑張ってください。
 
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[install-docker]: https://docs.docker.com/engine/installation
-[install-docker-compose]: https://docs.docker.com/compose/install
-[install-gradle]: https://gradle.org/install
+``` bash
+$ git remote add origin "当該リポジトリのURL" 
+ex) git remote add origin https://github.com/cs-u-gakugei-ac-jp/java_app_sample.git
+$ git add -A
+$ git commit -m "first commit"
+$ git push origin master
+```

@@ -53,7 +53,7 @@ $ docker-compose up
 
 ### Web アプリの動作確認
 
-任意のブラウザで、 **http://localhost:8080/hello** にアクセスすれば、 "Hello World !" が表示されるはずです。
+任意のブラウザで、 **http://localhost:8888/hello** にアクセスすれば、 "Hello World !" が表示されるはずです。
 
 ### DB の動作確認
 
@@ -62,7 +62,7 @@ $ docker-compose up
 - **HOST:** 127.0.0.1
 - **USER:** root
 - **PASSWORD:** root
-- **PORT:** 3306
+- **PORT:** 3333
 
 ## パクるために（option）
 

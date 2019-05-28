@@ -9,7 +9,7 @@ services:
       - ./:/java_app_sample
       - ./build/libs/:/usr/local/tomcat/webapps/
     ports:
-      - "8080:8080"
+      - "8888:8080"
 
   db:
     build:
@@ -21,7 +21,7 @@ services:
     volumes:
       - mysql:/mysql
     ports:
-      - "3306:3306"
+      - "3333:3306"
 
 volumes:
   mysql: {}

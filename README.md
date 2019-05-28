@@ -42,7 +42,7 @@ $ docker-compose build
 下記のコマンドを実行することにより、 **Tomcat コンテナ** 上で、 **build** を行い、 war ファイルが生成されます。 
 
 ``` bash
-$ docker-compose run --rm app gradle build
+$ docker-compose exec app gradle build
 ```
 
 ### Docker Compose Up

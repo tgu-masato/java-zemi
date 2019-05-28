@@ -10,6 +10,8 @@
 
 入ってない人たちは、 https://www.docker.com/ に行きましょう。 
 
+- **Java**
+
 ## ローカルで動かすために
 
 ### **$ git clone** or ($ ghq get)

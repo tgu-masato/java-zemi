@@ -36,7 +36,7 @@ $ cd "ひとそれぞれ"/java_app_sample
 下記のコマンドを実行することにより、 **build** を行い、 war ファイルが生成されます。 
 
 ``` bash
-$ ./gradlew build
+$ docker-compose run --rm app gradle build
 ```
 
 ### Docker Compose Up

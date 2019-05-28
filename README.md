@@ -33,6 +33,10 @@ $ cd "ひとそれぞれ"/java_app_sample
 
 下記のコマンドを実行することにより、 **MySQL コンテナ** と **Tomcat コンテナ** を作成し始めます。
 
+```bash
+$ docker-compose build
+```
+
 ### Gradlew Build
 
 下記のコマンドを実行することにより、 **Tomcat コンテナ** 上で、 **build** を行い、 war ファイルが生成されます。 

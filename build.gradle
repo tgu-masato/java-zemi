@@ -7,6 +7,12 @@ repositories {
 
 dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
+    compile('javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1') {
+        transitive = false
+    }
+    compile('org.glassfish.web:javax.servlet.jsp.jstl:1.2.1') {
+        transitive = false
+    }
     runtime "mysql:mysql-connector-java:8.0.15"
     providedCompile 'org.apache.tomcat:tomcat-servlet-api:8.5.15'
 }

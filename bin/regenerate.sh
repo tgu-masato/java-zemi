@@ -138,7 +138,7 @@ echo "* done!"
 echo "\nREADME.md の初期化を行います。"
 rm ${new_repository_dir}/README.md
 touch ${new_repository_dir}/README.md
-echo "#${project_name}" >> ${new_repository_dir}/README.md
+echo "# ${project_name}" >> ${new_repository_dir}/README.md
 echo "* done!"
 
 echo "\n* GitHub の諸設定を行います。"
@@ -159,8 +159,9 @@ echo "\nセットアップが完了しました。以下の手順に則ると、
 echo "\n1. $ ghq look ${project_name} ( 当該ディレクトリに移動する。 )"
 echo "2. $ docker-compose build ( イメージのビルドを行う。 )"
 echo "3. $ docker-compose up ( コンテナの起動を行う。 )"
-echo "4. http://localhost:${app_port} にブラウザ等でアクセスし、アプリケーションが動作することを確認する。"
-echo "5. 以下の情報で、DB にアクセスし、疎通確認を行う。 ( TablePlus 等を用いるとよいのかな。 )"
+echo "4. $ docker-compose exec app gradle -t build ( java プログラムのビルドを行う。 )"
+echo "5. http://localhost:${app_port} にブラウザ等でアクセスし、アプリケーションが動作することを確認する。"
+echo "6. 以下の情報で、DB にアクセスし、疎通確認を行う。 ( TablePlus 等を用いるとよいのかな。 )"
 echo "  - User: root"
 echo "  - Password: root"
 echo "  - Port: ${db_port}"

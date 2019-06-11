@@ -49,10 +49,16 @@ $ docker-compose up
 
 ### Gradlew Build
 
-下記のコマンドを実行することにより、 **Tomcat コンテナ** 上で、 **build** を行い、 war ファイルが生成されます。 
+下記のコマンドを実行することにより、 **Tomcat コンテナ** 上で、 **build** を行い、 war ファイルが生成されます。
 
 ``` bash
 $ docker-compose exec app gradle build
+```
+
+上記のコマンドでは、コマンドを実行したタイミングで一回のみ build を行いますが、下記コマンドを実行すると、同時にファイル監視ツールも起動しファイルが変更されたタイミングで自動的に build が走るようになります。
+
+``` bash
+$ docker-compose exec app gradle -t build
 ```
 
 ## もろもろ確認
@@ -63,7 +69,7 @@ $ docker-compose exec app gradle build
 
 ### DB の動作確認
 
-以下のパラメータで、 DB との疎通確認が行えるはずです。データベースの指定は、任意ですがデフォルトでは以下のような **sample** という DB が生成されているはずです。
+以下のパラメータで、 DB との疎通確認が行えるはずです。データベースの指定は、任意ですがデフォルトでは以下のような **java_app_sample** という DB が生成されているはずです。
 
 - **HOST:** 127.0.0.1
 - **USER:** root

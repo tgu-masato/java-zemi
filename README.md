@@ -82,7 +82,7 @@ $ docker-compose exec app gradle -t build
 ### 空の GitHub リポジトリ作成
 
 自身で、 GitHub のリポジトリを作成しましょう。  
-このとき、かならず空のリポジトリを作成するようにしてください。
+このとき、かならず空のリポジトリを作成するようにしてください。（.gitignore ファイルや、 README.md ファイルは作成しちゃダメ。）
 
 ### regenerate.sh の実行
 

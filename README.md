@@ -40,7 +40,6 @@ $ docker-compose build
 ### Docker Compose Up
 
 下記のコマンドを実行することにより、 **MySQL コンテナ** と **Tomcat コンテナ** が起動し、アプリケーションが動作し始めます。
-また、このコマンドを実行した後に、下記の `$ docker-compose exec app gradle build` コマンドを実行すれば、自動的に変更を検知し、アプリケーションが更新されます。
 プログラムを編集した際には、上記のコマンドを実行するということを覚えておきましょう。
 
 ``` bash
@@ -49,7 +48,7 @@ $ docker-compose up
 
 ### Gradlew Build
 
-下記のコマンドを実行することにより、 **Tomcat コンテナ** 上で、 **build** を行い、 war ファイルが生成されます。
+下記のコマンドを実行することにより、 **Tomcat コンテナ** 上で、 **java プログラムの build** を行い、 war ファイルが生成されます。
 
 ``` bash
 $ docker-compose exec app gradle build
@@ -76,35 +75,18 @@ $ docker-compose exec app gradle -t build
 - **PASSWORD:** root
 - **PORT:** 3333
 
-## パクるために（option）
+## プログラムのコピー方法
 
 以下にパクリ方書いておきます。（バグがあったらごめんなさい。）
 
-### .git ディレクトリの削除
+### 空の GitHub リポジトリ作成
 
-``` bash
-$ rm -rf .git
-```
+自身で、 GitHub のリポジトリを作成しましょう。  
+このとき、かならず空のリポジトリを作成するようにしてください。
 
-### 自身のアカウントで git リポジトリ を作成
+### regenerate.sh の実行
 
-がんばりましょう。
-リポジトリを作成したら、当該リポジトリの URL をコピーしておきましょう。
+このリポジトリをコピーするシェルスクリプトを書いておいたので、これを実行するとよきです。  
+出力の指示に従い、入力を行えば新たにプロジェクトを生成できるはずです。
 
-### 自身の作成した git リポジトリ との関連付け
-
-以下のコマンドを実行すれば、おそらく当該リポジトリにデータが反映されるはずです。
-それからは、自分で開発頑張ってください。
-
-``` bash
-$ git remote add origin "当該リポジトリのURL" 
-ex) git remote add origin https://github.com/cs-u-gakugei-ac-jp/java_app_sample.git
-$ git add -A
-$ git commit -m "first commit"
-$ git push origin master
-```
-
-## コンテナ操作用シェルスクリプト（option）
-
-bin ディレクトリにコンテナ操作用のシェルスクリプトを書いておきました。必要であれば、使ってください。  
-このシェルスクリプトを用いて、コンテナを作成すると **hot deploy** （ファイルセーブ時に自動的にアプリケーションが更新される）が有効になります。
+`$ sh bin/regenerate.sh`

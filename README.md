@@ -31,7 +31,7 @@ $ cd "ひとそれぞれ"/java_app_sample
 
 ### Docker Compose Build
 
-下記のコマンドを実行することにより、 **MySQL コンテナ** と **Tomcat コンテナ** を作成し始めます。
+下記のコマンドを実行することにより、 **MySQL コンテナ** と **Tomcat コンテナ** と **Gradle コンテナ** を作成し始めます。
 
 ```bash
 $ docker-compose build
@@ -39,25 +39,10 @@ $ docker-compose build
 
 ### Docker Compose Up
 
-下記のコマンドを実行することにより、 **MySQL コンテナ** と **Tomcat コンテナ** が起動し、アプリケーションが動作し始めます。
-プログラムを編集した際には、上記のコマンドを実行するということを覚えておきましょう。
+下記のコマンドを実行することにより、 **MySQL コンテナ** と **Tomcat コンテナ** と **Gradle コンテナ** が起動し、アプリケーションが動作し始めます。
 
 ``` bash
 $ docker-compose up
-```
-
-### Gradlew Build
-
-下記のコマンドを実行することにより、 **Tomcat コンテナ** 上で、 **java プログラムの build** を行い、 war ファイルが生成されます。
-
-``` bash
-$ docker-compose exec app gradle build
-```
-
-上記のコマンドでは、コマンドを実行したタイミングで一回のみ build を行いますが、下記コマンドを実行すると、同時にファイル監視ツールも起動しファイルが変更されたタイミングで自動的に build が走るようになります。
-
-``` bash
-$ docker-compose exec app gradle -t build
 ```
 
 ## もろもろ確認

@@ -5,8 +5,10 @@ services:
     build:
       context: ./containers/app
     working_dir: /${PROJECT_NAME}
+    depends_on:
+      - db
+      - gradle
     volumes:
-      - ./:/${PROJECT_NAME}
       - ./build/libs/:/usr/local/tomcat/webapps/
     ports:
       - ${APP_PORT}:8080
@@ -22,6 +24,14 @@ services:
       - mysql:/mysql
     ports:
       - ${DB_PORT}:3306
+
+  gradle:
+    build:
+      context: ./containers/gradle
+    working_dir: /${PROJECT_NAME}
+    volumes:
+      - ./:/${PROJECT_NAME}
+    command: gradle -t build
 
 volumes:
   mysql: {}

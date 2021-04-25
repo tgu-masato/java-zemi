@@ -1,1 +1,1 @@
-FROM gradle:5.4.1
+FROM gradle:6.8

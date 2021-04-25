@@ -31,7 +31,7 @@ services:
     working_dir: /${PROJECT_NAME}
     volumes:
       - ./:/${PROJECT_NAME}
-    command: gradle -t build
+    command: gradle -t build --warning-mode all
 
 volumes:
   mysql: {}

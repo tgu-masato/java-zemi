@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'java-library'
 apply plugin: 'war'
 
 repositories {
@@ -6,14 +7,12 @@ repositories {
 }
 
 dependencies {
-    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
-    compile('javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1') {
-        transitive = false
-    }
-    compile('org.glassfish.web:javax.servlet.jsp.jstl:1.2.1') {
-        transitive = false
-    }
-    runtime "mysql:mysql-connector-java:8.0.15"
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.15' // mysql8系
+    implementation group: 'javax.servlet.jsp.jstl', name: 'jstl-api', version: '1.2'
+
+    runtimeOnly group: 'org.glassfish.web', name: 'jstl-impl', version: '1.2'
+    runtimeOnly "mysql:mysql-connector-java:8.0.15"
+
     providedCompile 'org.apache.tomcat:tomcat-servlet-api:8.5.15'
 }
 

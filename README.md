@@ -8,7 +8,8 @@
 |2021/05/14|初版|初版作成|
 |2021/05/19|第二版|各機能を名前ごとに整理し加筆<br>改版履歴と用語の定義の追加|
 |2021/05/20|第三版|データベース構造の追加|
-|2021/05/22|第四版|分かりにくい用語の統一<br>データベース構造の改善| 
+|2021/05/22|第四版|分かりにくい用語の統一<br>データベース構造の改善①|
+|2021/05/24|第五版|データベース構造の改善②|
 
 ### 用語の定義
 |用語|定義|
@@ -17,6 +18,7 @@
 |ユーザ|本システムを利用する利用者のこと。|
 |データベース|本システムを運用するために用いるMySQLのこと。|
 |レビュー|ユーザが登録したおすすめのグルメ情報である、店名・評価・題名・コメントのひとまとまりのこと。|
+|コメント|ユーザがレビューを登録またはレビューにリアクションするときに記入する、自由記述の文章のこと。|
 |マイデータ|各ユーザが本システム上で登録またはいいねしたレビューを保存したデータのこと。|
 
 
@@ -50,7 +52,7 @@
 #### 2-3. レビュー登録機能
 ユーザが他のユーザに共有またはマイデータに保存したいグルメ情報を登録する機能。<br>
 ユーザがレビュー登録ページにおいて必要事項を入力し、ページ下部の「登録完了」ボタンを押下することで、レビューの登録が完了する。<br>
-店名を新規登録する場合は、店名新規登録画面に遷移する。
+店名を新規登録する場合は、店名新規登録ページに遷移する。
 
 |入力事項|制約|備考|
 |:---|:---|:---|
@@ -74,8 +76,8 @@
 レビュー閲覧ページ以下の各表示において、ページ下部の「ソート」ボタンを押下することで、ソートの種類に応じてレビューがソート表示される。
 
 **ソートの種類**
-- おすすめされた回数順
-- おすすめ度の評価順
+- レビューされた回数順
+- レビューの評価順
 - レビューの更新日時順
 
 #### 2-7. マイデータ確認機能
@@ -100,6 +102,7 @@
 |email|メールアドレス|VARCHAR(100)|UNIQUE<br>NOT NULL||
 |password|パスワード|VARCHAR(20)|NOT NULL||
 |created_at|作成日時|DATETIME|NOT NULL||
+|updated_at|更新日時|DATETIME|NOT NULL||
 
 #### 3-2. お店テーブル
 
@@ -108,7 +111,9 @@
 |id|お店テーブルのキー|INT|UNIQUE<br>AUTO INCREMENT<br>NOT NULL||
 |store_name|店名|VARCHAR(20)|UNIQUE<br>NOT NULL||
 |evaluation_avg|評価の平均値|FLOAT|NOT NULL|ソートの参照値になる|
+|review_count|ユーザからレビューされた回数|INT|NOT NULL|ソートの参照値になる|
 |created_at|作成日時|DATETIME|NOT NULL||
+|updated_at|更新日時|DATETIME|NOT NULL||
 
 #### 3-3. レビューテーブル
 
@@ -129,37 +134,32 @@
 |カラム名|説明|型|制約|備考|
 |:---|:---|:---|:---|:---|
 |id|お店ブロックリアクションテーブルのキー|INT|UNIQUE<br>AUTO INCREMENT<br>NOT NULL||
-|favorite_to_store|お店に対するいいねの有無|BOOLEAN|NOT NULL||
+|favorite_to_store|ユーザからのお店に対するいいねの有無|BOOLEAN|NOT NULL||
 |created_at|作成日時|DATETIME|NOT NULL||
+|updated_at|更新日時|DATETIME|NOT NULL||
+|user_id|ユーザID|INT|NOT NULL|お店にリアクション（いいね）したユーザのユーザID|
 |store_id|お店ID|INT|NOT NULL||
 
 ##### 3-4-2. レビュー詳細リアクションテーブル
+##### 3-4-2-1. レビュー詳細いいねテーブル
 
 |カラム名|説明|型|制約|備考|
 |:---|:---|:---|:---|:---|
 |id|レビュー詳細リアクションテーブルのキー|INT|UNIQUE<br>AUTO INCREMENT<br>NOT NULL||
-|favorite_to_review|レビューに対するいいねの有無|BOOLEAN|NOT NULL||
-|re_comment|返信コメント|VARCHAR(400)|||
+|favorite_to_review|ユーザからのレビューに対するいいねの有無|BOOLEAN|NOT NULL||
 |created_at|作成日時|DATETIME|NOT NULL||
+|updated_at|更新日時|DATETIME|NOT NULL||
+|user_id|ユーザID|INT|NOT NULL|レビューにリアクション（いいね）したユーザのユーザID|
 |review_id|レビューID|INT|NOT NULL||
 
-#### 3-5. 中間テーブル
-##### 3-5-1. ユーザお店ブロックリアクションテーブル
-ユーザがどのお店にリアクション（いいね）したのか、お店はどのユーザからリアクションされたのかをたどるための中間テーブル。
+##### 3-4-2-2. レビュー詳細コメントテーブル
 
 |カラム名|説明|型|制約|備考|
 |:---|:---|:---|:---|:---|
-|id|中間テーブルのキー|INT|UNIQUE<br>AUTO INCREMENT<br>NOT NULL||
+|id|レビュー詳細リアクションテーブルのキー|INT|UNIQUE<br>AUTO INCREMENT<br>NOT NULL||
+|re_comment|返信コメント|VARCHAR(400)|||
 |created_at|作成日時|DATETIME|NOT NULL||
-|user_id|ユーザID|INT|NOT NULL||
-|store_reaction_id|お店ブロックリアクションID|INT|NOT NULL||
+|updated_at|更新日時|DATETIME|NOT NULL||
+|user_id|ユーザID|INT|NOT NULL|レビューにリアクション（コメント）したユーザのユーザID|
+|review_id|レビューID|INT|NOT NULL||
 
-##### 3-5-2. ユーザレビュー詳細リアクションテーブル
-ユーザがどのレビューにリアクション（いいね・コメント）したのか、レビューはどのユーザからリアクションされたのかをたどるための中間テーブル。
-
-|カラム名|説明|型|制約|備考|
-|:---|:---|:---|:---|:---|
-|id|中間テーブルのキー|INT|UNIQUE<br>AUTO INCREMENT<br>NOT NULL||
-|created_at|作成日時|DATETIME|NOT NULL||
-|user_id|ユーザID|INT|NOT NULL|レビューにリアクションしたユーザのユーザID|
-|review_reaction_id|レビュー詳細リアクションID|INT|NOT NULL||

@@ -1,0 +1,70 @@
+@startuml
+
+class User {
+    int id
+    varchar user_name
+    varchar email
+    varchar password
+    datetime created_at
+    datetime updated_at
+
+    login()
+    review()
+    favorite()
+    comment()
+    logout()
+
+}
+
+class Store {
+    int id
+    varchar store_name
+    float evaluation_avg
+    int review_count
+    datetime created_at
+    datetime updated_at
+
+}
+
+class Review {
+    int id
+    float evaluation
+    varchar title
+    varchar comment
+    datetime created_at
+    datetime updated_at
+}
+
+class StoreFavorite {
+    int id
+    boolean favorite_to_store
+    datetime created_at
+    datetime updated_at
+}
+
+class ReviewFavorite {
+    int id
+    favorite_to_review
+    datetime created_at
+    datetime updated_at
+}
+
+class ReviewComment {
+    int id
+    varchar re_comment
+    datetime created_at
+    datetime updated_at
+}
+
+left to right direction
+
+User "1" -- "0..*" Review
+User "1" -- "0..*" StoreFavorite
+User "1" -- "0..*" ReviewFavorite
+User "1" -- "0..*" ReviewComment
+Store "1" -- "0..*" Review
+Review "1" -- "0..*" ReviewFavorite
+Review "1" -- "0..*" ReviewComment
+Store "1" -- "0..*" StoreFavorite
+
+@enduml

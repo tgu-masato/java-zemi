@@ -1,16 +1,19 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: A191417
+  Date: 2021/06/22
+  Time: 15:47
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>新規ユーザー情報登録</title>
+    <title>ログイン画面</title>
 </head>
 <body>
-<p>ユーザー情報を入力してください</p>
-<form action="/User/SignUp" method="post">
+<p>ログイン情報を入力してください</p>
+<form action="/sessions/new" method="post">
     <table>
-        <tr>
-            <td>氏名</td>
-            <td><input type="text" name="name" required /></td>
-        </tr>
         <tr>
             <td>メールアドレス</td>
             <td><input type="email" id="mail" name="email" required /></td>

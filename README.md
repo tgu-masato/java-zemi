@@ -46,7 +46,7 @@
 
 |入力事項|制約|備考|
 |:---|:---|:---|
-|ユーザネーム|NOT NULL|半角英数字|
+|メールアドレス|NOT NULL, UNIQUE||
 |パスワード|NOT NULL, 数字のみ不可, 英字のみ不可|半角英数字の組み合わせ<br>パスワード確認も行う|
 
 #### 2-3. レビュー登録機能
@@ -98,7 +98,7 @@
 |カラム名|説明|型|制約|備考|
 |:---|:---|:---|:---|:---|
 |id|ユーザテーブルのキー|INT|UNIQUE<br>AUTO INCREMENT<br>NOT NULL||
-|user_name|ユーザネーム|VARCHAR(20)|NOT NULL||
+|name|ユーザネーム|VARCHAR(20)|NOT NULL||
 |email|メールアドレス|VARCHAR(100)|UNIQUE<br>NOT NULL||
 |password|パスワード|VARCHAR(20)|NOT NULL||
 |created_at|作成日時|DATETIME|NOT NULL||
@@ -109,7 +109,7 @@
 |カラム名|説明|型|制約|備考|
 |:---|:---|:---|:---|:---|
 |id|お店テーブルのキー|INT|UNIQUE<br>AUTO INCREMENT<br>NOT NULL||
-|store_name|店名|VARCHAR(20)|UNIQUE<br>NOT NULL||
+|name|店名|VARCHAR(20)|UNIQUE<br>NOT NULL||
 |evaluation_avg|評価の平均値|FLOAT|NOT NULL|ソートの参照値になる|
 |review_count|ユーザからレビューされた回数|INT|NOT NULL|ソートの参照値になる|
 |created_at|作成日時|DATETIME|NOT NULL||

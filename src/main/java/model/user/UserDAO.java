@@ -14,7 +14,7 @@ public class UserDAO extends Client {
 
         try {
             //SQLコマンド
-            String sql = "insert into Users(name, email, password, created_at, updated_at) values(?, ?, ?, ?, ?)";
+            String sql = "insert into users(name, email, password, created_at, updated_at) values(?, ?, ?, ?, ?)";
 
             connection = create();
 
@@ -38,6 +38,40 @@ public class UserDAO extends Client {
             e.printStackTrace();
             return;
 
+        } finally {
+            close(connection, stmt, rs);
+        }
+    }
+
+    public static User selectUserByEmail(String email) {
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select * from users where email = ?";
+
+            connection = create();
+
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, email);
+
+            rs = stmt.executeQuery();
+            //スコープの問題があるので一旦外で定義
+            User user = null;
+            if (rs.next()) {
+                user = new User(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getTimestamp("created_at"),
+                        rs.getTimestamp("updated_at")
+                );
+            }
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         } finally {
             close(connection, stmt, rs);
         }

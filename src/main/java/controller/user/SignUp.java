@@ -22,8 +22,8 @@ public class SignUp extends HttpServlet {
 
         //requestオブジェクトから情報を取り出す
         String name = request.getParameter("name");
-        String mail = request.getParameter("mail");
-        String pass = request.getParameter("pass");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
 
 //        System.out.println("取得した文字列は"+ name + "です！");
 //        System.out.println("取得した文字列は"+ mail + "です！");
@@ -33,8 +33,8 @@ public class SignUp extends HttpServlet {
         User user = new User(
                 null,
                 name,
-                mail,
-                pass,
+                email,
+                password,
                 null,
                 null
         );

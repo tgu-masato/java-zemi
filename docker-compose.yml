@@ -9,7 +9,10 @@ services:
       - db
       - gradle
     volumes:
-      - ./build/libs/:/usr/local/tomcat/webapps/
+      - type: bind
+        source: ./build/libs/
+        target: /usr/local/tomcat/webapps/
+    #      - ./build/libs/:/usr/local/tomcat/webapps/
     ports:
       - ${APP_PORT}:8080
 
